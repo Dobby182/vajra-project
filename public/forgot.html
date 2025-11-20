@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forgot Password | Vajra Naturals</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/vajralogo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/stylelogin.css">
+</head>
+<body>
+  <div class="top-banner">Get extra 10% off on your first order</div>
+
+  <header> ... same navbar as others ... </header>
+
+  <section class="login-container">
+    <div class="login-box">
+      <h2 class="playfair-font">Forgot Password</h2>
+      <form id="forgotForm">
+        <p style="font-size:14px; margin-bottom:20px; color:#314d24;">
+          Enter your registered email address and we will send you a link to reset your password.
+        </p>
+        <input id="email" type="email" name="email" placeholder="Email" required />
+        <div class="login-links">
+          <a href="login.html">Back to Login</a>
+          <a href="register.html">Create new account</a>
+        </div>
+        <button type="submit">Send Reset Link</button>
+      </form>
+      <p id="forgotMsg" style="color:#314d24;"></p>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      // For demo: we'll just call backend endpoint that responds OK if user exists.
+      const res = await fetch('/api/forgot', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      document.getElementById('forgotMsg').textContent = data.message || 'If account exists, a reset link was sent.';
+    });
+  </script>
+</body>
+</html>

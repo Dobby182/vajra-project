@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register | Vajra Naturals</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #faf8ed;
+        margin: 0;
+        padding: 0;
+      }
+
+      .register-container {
+        width: 500px;
+        margin: 80px auto;
+        background: #fefefe;
+        padding: 40px;
+        border: 1px solid #e2d7bd;
+        border-radius: 6px;
+      }
+
+      .register-container h2 {
+        text-align: center;
+        color: #2f4f2f;
+        font-size: 36px;
+        margin-bottom: 30px;
+      }
+
+      .register-container input {
+        width: 90%;
+        padding: 12px;
+        margin: 10px 5%;
+        border: 1px solid #d6c7a1;
+        border-radius: 4px;
+        background: #f7f2e8;
+        font-size: 15px;
+      }
+
+      .register-container button {
+        display: block;
+        margin: 20px auto 10px;
+        padding: 10px 25px;
+        font-size: 15px;
+        border: 1px solid #000;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .register-container p {
+        text-align: center;
+        color: #444;
+        margin-top: 10px;
+      }
+
+      .register-container a {
+        color: #2f4f2f;
+        font-weight: bold;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="register-container">
+      <h2>Register</h2>
+
+      <!-- FIXED FORM -->
+      <form
+        action="/api/register"
+        method="POST"
+        onsubmit="return validateRegister()"
+      >
+        <input
+          type="text"
+          id="reg-name"
+          name="name"
+          placeholder="Full Name"
+          required
+        />
+        <input
+          type="email"
+          id="reg-email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+        <input
+          type="password"
+          id="reg-password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <input
+          type="password"
+          id="reg-confirm"
+          placeholder="Confirm Password"
+          required
+        />
+
+        <button type="submit">Register</button>
+
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+      </form>
+    </div>
+
+    <script src="js/validation.js"></script>
+  </body>
+</html>

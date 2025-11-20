@@ -1,0 +1,254 @@
+/* style.css */
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  background-color: #fffef6;
+  color: #2f2f2f;
+}
+
+.top-banner {
+  background-color: #314d31;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fffaf0;
+  padding: 15px 40px;
+  border-bottom: 1px solid #e2d3b8;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.navbar-left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: #2f2f2f;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2f2f2f;
+  margin-right: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.nav-links a:hover {
+  color: #314d24;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fffef8;
+  min-width: 130px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #d9c5a3;
+  z-index: 10;
+}
+
+.dropdown-content a {
+  color: #2f2f2f;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f3e7d0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar-right-group {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.search-bar {
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 5px;
+  width: 150px;
+}
+
+.navbar-icons a {
+  color: #314d24;
+  margin-left: 12px;
+  font-size: 18px;
+}
+
+.navbar-icons a:hover {
+  color: #183521;
+}
+
+/* Hero */
+.hero {
+  text-align: left;
+  padding: 100px 80px;
+  background-color: #fffef3;
+}
+
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #314d24;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 20px;
+  color: #5a5a5a;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 25px;
+  border: 1px solid #3c2e24;
+  background: transparent;
+  color: #314d24;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #314d24;
+  color: #fff;
+}
+
+/* Bestsellers */
+.bestsellers {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.bestsellers h3 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 26px;
+  margin-bottom: 40px;
+  color: #314d24;
+}
+
+.bestseller-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.bestseller-item {
+  width: 280px;
+  border: 1px solid #e2d3b8;
+  border-radius: 6px;
+  background-color: #fffef8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.bestseller-item:hover {
+  transform: translateY(-5px);
+}
+
+.bestseller-item img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.bestseller-item p {
+  font-weight: 500;
+  color: #314d24;
+}
+
+/* Our Promise */
+.our-promise {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #fffaf0;
+}
+
+.our-promise h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 26px;
+  margin-bottom: 40px;
+  color: #2f5d3a;
+}
+
+.promise-icons {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.promise-item {
+  text-align: center;
+}
+
+.promise-item img {
+  filter: hue-rotate(90deg) saturate(200%);
+}
+
+.promise-item p {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #314d24;
+}
+
+/* Contact Page small */
+.contact-section {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #fffef6;
+}
+
+.contact-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: #314d24;
+  margin-bottom: 20px;
+}
+
+.contact-details {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fffaf0;
+  padding: 30px 40px;
+  border: 1px solid #e2d3b8;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: left;
+}
