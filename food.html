@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Products - Vajra Naturals</title>
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/vajralogo.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="top-banner">Get extra 10% off on your first order</div>
+
+  <header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <h1 class="playfair-font">vajra</h1>
+        <div class="nav-links">
+          <a href="../index.html">HOME</a>
+          <a href="../products.html">PRODUCTS</a>
+          <div class="dropdown">
+            <a href="#">CATEGORIES</a>
+            <div class="dropdown-content">
+              <a href="hair.html">HAIR</a>
+              <a href="skin.html">SKIN</a>
+              <a href="food.html" class="active">FOOD</a>
+            </div>
+          </div>
+          <a href="../reviews.html">REVIEWS</a>
+          <a href="../contact.html">CONTACT</a>
+        </div>
+      </div>
+
+      <div class="navbar-right-group">
+        <form class="search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text"  required>
+        </form>
+
+        <div class="navbar-icons">
+          <a href="#"><i class="far fa-heart"></i></a>
+          <a href="#"><i class="fas fa-shopping-cart"></i></a>
+          <a href="../login.html"><i class="far fa-user-circle"></i></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <h2 class="category-title">Food Products</h2>
+
+  <div class="category-container">
+
+    <!-- Product 1 -->
+    <div class="category-card">
+      <img src="images/health mix powder .jpeg" alt="Health Mix Powder">
+      <h3>Health Mix Powder</h3>
+      <div class="ratings">⭐⭐⭐⭐⭐ (5/5)</div>
+      <p>₹250 <span class="old-price">₹300</span></p>
+      <div class="quantity-selector">
+        <button class="decrease">-</button>
+        <input type="number" value="1" min="1">
+        <button class="increase">+</button>
+      </div>
+      <div class="actions">
+        <button class="add-to-cart">Add to Cart </button>
+        <button class="like-btn">🤍</button>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="category-card">
+      <img src="images/wegiht loss.jpeg" alt="Weight Loss Powder">
+      <h3>Weight Loss Powder</h3>
+      <div class="ratings">⭐⭐⭐⭐☆ (4/5)</div>
+      <p>₹300 <span class="old-price">₹350</span></p>
+      <div class="quantity-selector">
+        <button class="decrease">-</button>
+        <input type="number" value="1" min="1">
+        <button class="increase">+</button>
+      </div>
+      <div class="actions">
+        <button class="add-to-cart">Add to Cart </button>
+        <button class="like-btn">🤍</button>
+      </div>
+    </div>
+
+    <!-- ⭐ NEW PRODUCT 3 — IDLY PODI ⭐ -->
+    <div class="category-card">
+      <img src="images/idlypodi.jpeg" alt="Idly Podi">
+      <h3>Idly Podi</h3>
+      <div class="ratings">⭐⭐⭐⭐⭐ (5/5)</div>
+      <p>₹180 <span class="old-price">₹220</span></p>
+      <div class="quantity-selector">
+        <button class="decrease">-</button>
+        <input type="number" value="1" min="1">
+        <button class="increase">+</button>
+      </div>
+      <div class="actions">
+        <button class="add-to-cart">Add to Cart </button>
+        <button class="like-btn">🤍</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  // ADD TO CART FUNCTION
+  document.querySelectorAll(".category-card").forEach(card => {
+    const addBtn = card.querySelector(".add-to-cart");
+
+    addBtn.addEventListener("click", () => {
+      const name = card.querySelector("h3").textContent;
+      const price = parseInt(card.querySelector("p").textContent.replace("₹",""));
+      const oldPrice = card.querySelector(".old-price").textContent.replace("₹","");
+      const img = card.querySelector("img").src;
+      const quantity = parseInt(card.querySelector("input").value);
+      const ratings = card.querySelector(".ratings").textContent;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // Check if item already in cart
+      let existing = cart.find(item => item.name === name);
+
+      if (existing) {
+        existing.quantity += quantity;
+      } else {
+        cart.push({
+          name,
+          price,
+          oldPrice,
+          img,
+          quantity,
+          ratings
+        });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Added to cart!");
+    });
+  });
+</script>
+
+</body>
+</html>

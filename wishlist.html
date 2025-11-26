@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vajra Naturals | Wishlist</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/vajralogo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <div class="top-banner">
+    Get extra 10% off on your first order!
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <h1 class="playfair-font">Vajra</h1>
+        <div class="nav-links">
+          <a href="index.html">HOME</a>
+          <a href="products.html">PRODUCTS</a>
+          <div class="dropdown">
+            <a href="#">CATEGORIES <i class="fa fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <a href="category/hair.html">HAIR</a>
+              <a href="category/skin.html">SKIN</a>
+              <a href="category/food.html">FOOD</a>
+            </div>
+          </div>
+          <a href="reviews.html">REVIEWS</a>
+          <a href="contact.html">CONTACT</a>
+        </div>
+      </div>
+
+      <div class="navbar-right">
+        <form class="search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text" placeholder="Search products..." required>
+        </form>
+
+        <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="login.html"><i class="fa-regular fa-circle-user"></i></a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section (like homepage) -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2 class="playfair-font">Your Wishlist</h2>
+      <p>All your favorite products in one place</p>
+      <a href="products.html" class="explore-btn">Explore Products</a>
+    </div>
+  </section>
+
+  <!-- Wishlist Container -->
+  <section class="wishlist-section">
+    <div class="wishlist-container" id="wishlist-container">
+      <!-- Wishlist items loaded dynamically -->
+    </div>
+  </section>
+
+  <script>
+    // Get wishlist items from localStorage
+    let liked = JSON.parse(localStorage.getItem('liked')) || [];
+    const wishlistContainer = document.getElementById('wishlist-container');
+
+    function renderWishlist() {
+      wishlistContainer.innerHTML = '';
+
+      if (liked.length === 0) {
+        wishlistContainer.innerHTML = '<p class="empty-msg">Your wishlist is empty.</p>';
+        return;
+      }
+
+      liked.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'wishlist-card';
+        card.innerHTML = `
+          <img src="${item.img}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>₹${item.price} <span class="old-price">₹${item.oldPrice || ''}</span></p>
+          <div class="wishlist-actions">
+            <button class="remove-btn">Remove 🗑️</button>
+          </div>
+        `;
+        wishlistContainer.appendChild(card);
+
+        card.querySelector('.remove-btn').addEventListener('click', () => {
+          liked.splice(index, 1);
+          updateWishlist();
+        });
+      });
+    }
+
+    function updateWishlist() {
+      localStorage.setItem('liked', JSON.stringify(liked));
+      renderWishlist();
+    }
+
+    renderWishlist();
+  </script>
+
+  <style>
+    /* Hero section like homepage */
+    .hero {
+      background: url('images/hero-bg.jpg') center/cover no-repeat;
+      padding: 80px 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-content h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: #1b451d; /* dark green heading */
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .explore-btn {
+      background-color: #2e7d32; /* green */
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .explore-btn:hover {
+      background-color: #1b5e20;
+    }
+
+    /* Wishlist grid */
+    .wishlist-section {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .wishlist-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .wishlist-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .wishlist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .wishlist-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .wishlist-card h3 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .wishlist-card p {
+      color: #555;
+      font-size: 16px;
+    }
+
+    .wishlist-card .old-price {
+      text-decoration: line-through;
+      color: #aaa;
+      margin-left: 5px;
+    }
+
+    .wishlist-card .remove-btn {
+      background-color: #2e7d32; /* green */
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .wishlist-card .remove-btn:hover {
+      background-color: #1b5e20;
+    }
+
+    .empty-msg {
+      text-align: center;
+      font-size: 18px;
+      color: #1b451d;
+      margin-top: 50px;
+    }
+
+    /* Navbar icons dark green */
+    .navbar-right a i {
+      color: #1b451d;
+      font-size: 20px;
+      margin-left: 15px;
+      transition: 0.3s;
+    }
+
+    .navbar-right a i:hover {
+      color: #2e7d32;
+    }
+
+    /* Search bar styling */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 5px 10px;
+      margin-right: 10px;
+    }
+
+    .search-bar i {
+      color: #1b451d;
+      margin-right: 5px;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+  </style>
+</body>
+</html>
