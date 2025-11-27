@@ -1,96 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart - Vajra Naturals</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Vajra Naturals</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="../images/vajralogo.png">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../images/vajralogo.png"
+    />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Top Banner -->
+    <div class="top-banner">Get extra 10% off on your first order</div>
 
-  <!-- Top Banner -->
-  <div class="top-banner">
-    Get extra 10% off on your first order
-  </div>
-
-  <!-- Navbar -->
-  <header>
-    <nav class="navbar">
-      <div class="navbar-left">
-        <h1 class="playfair-font">vajra</h1>
-        <div class="nav-links">
-          <a href="../index.html">HOME</a>
-          <a href="../products.html">PRODUCTS</a>
-          <div class="dropdown">
-            <a href="#">CATEGORIES</a>
-            <div class="dropdown-content">
-              <a href="hair.html">HAIR</a>
-              <a href="skin.html">SKIN</a>
-              <a href="food.html">FOOD</a>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-left">
+          <h1 class="playfair-font">vajra</h1>
+          <div class="nav-links">
+            <a href="../index.html">HOME</a>
+            <a href="../products.html">PRODUCTS</a>
+            <div class="dropdown">
+              <a href="#">CATEGORIES</a>
+              <div class="dropdown-content">
+                <a href="/category/hair.html">HAIR</a>
+                <a href="/category/skin.html">SKIN</a>
+                <a href="/category/food.html">FOOD</a>
+              </div>
             </div>
+            <a href="../reviews.html">REVIEWS</a>
+            <a href="../contact.html">CONTACT</a>
           </div>
-          <a href="../reviews.html">REVIEWS</a>
-          <a href="../contact.html">CONTACT</a>
         </div>
-      </div>
 
-      <div class="navbar-right-group">
-        <form class="search-bar">
-          <i class="fa fa-search"></i>
-          <input type="text" placeholder="Search products..." required>
-        </form>
+        <div class="navbar-right-group">
+          <form class="search-bar">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search products..." required />
+          </form>
 
-        <div class="navbar-icons">
-          <a href="../wishlist.html"><i class="far fa-heart"></i></a>
-          <a href="../cart.html"><i class="fas fa-shopping-cart"></i></a>
-          <a href="../login.html"><i class="far fa-user-circle"></i></a>
+          <div class="navbar-icons">
+            <a href="../wishlist.html"><i class="far fa-heart"></i></a>
+            <a href="../cart.html"><i class="fas fa-shopping-cart"></i></a>
+            <a href="../login.html"><i class="far fa-user-circle"></i></a>
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
 
-  <!-- Cart Title -->
-  <h2 class="category-title">Your Cart</h2>
+    <!-- Cart Title -->
+    <h2 class="category-title">Your Cart</h2>
 
-  <!-- Cart Container -->
-  <div class="category-container" id="cart-container">
-    <!-- Cart items will appear here dynamically -->
-  </div>
+    <!-- Cart Container -->
+    <div class="category-container" id="cart-container">
+      <!-- Cart items will appear here dynamically -->
+    </div>
 
-  <!-- Total Price -->
-  <div style="text-align:center; margin: 30px 0; font-size: 20px; font-weight: 600;">
-    Total: ₹<span id="cart-total">0</span>
-  </div>
+    <!-- Total Price -->
+    <div
+      style="
+        text-align: center;
+        margin: 30px 0;
+        font-size: 20px;
+        font-weight: 600;
+      "
+    >
+      Total: ₹<span id="cart-total">0</span>
+    </div>
 
-  <script>
-    // Get cart data from localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    <!-- ⭐ PAY NOW BUTTON -->
+    <div style="text-align: center; margin-bottom: 40px">
+      <button
+        id="pay-now-btn"
+        style="
+          padding: 12px 30px;
+          font-size: 18px;
+          cursor: pointer;
+          background: black;
+          color: white;
+          border: none;
+          border-radius: 5px;
+        "
+      >
+        Pay Now
+      </button>
+    </div>
 
-    const cartContainer = document.getElementById('cart-container');
-    const cartTotal = document.getElementById('cart-total');
+    <script>
+      // Get cart data from localStorage
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function renderCart() {
-      cartContainer.innerHTML = '';
-      let total = 0;
+      const cartContainer = document.getElementById("cart-container");
+      const cartTotal = document.getElementById("cart-total");
 
-      cart.forEach((item, index) => {
-        total += item.price * item.quantity;
+      function renderCart() {
+        cartContainer.innerHTML = "";
+        let total = 0;
 
-        const card = document.createElement('div');
-        card.className = 'category-card';
-        card.innerHTML = `
+        cart.forEach((item, index) => {
+          total += item.price * item.quantity;
+
+          const card = document.createElement("div");
+          card.className = "category-card";
+          card.innerHTML = `
           <img src="${item.img}" alt="${item.name}">
           <h3>${item.name}</h3>
           <div class="ratings">${item.ratings}</div>
@@ -104,37 +137,74 @@
             <button class="remove-btn">Remove 🗑️</button>
           </div>
         `;
-        cartContainer.appendChild(card);
+          cartContainer.appendChild(card);
 
-        const input = card.querySelector('input');
-        card.querySelector('.increase').addEventListener('click', () => {
-          item.quantity++;
-          input.value = item.quantity;
-          updateCart();
-        });
-        card.querySelector('.decrease').addEventListener('click', () => {
-          if(item.quantity > 1) {
-            item.quantity--;
+          const input = card.querySelector("input");
+          card.querySelector(".increase").addEventListener("click", () => {
+            item.quantity++;
             input.value = item.quantity;
             updateCart();
-          }
+          });
+          card.querySelector(".decrease").addEventListener("click", () => {
+            if (item.quantity > 1) {
+              item.quantity--;
+              input.value = item.quantity;
+              updateCart();
+            }
+          });
+          card.querySelector(".remove-btn").addEventListener("click", () => {
+            cart.splice(index, 1);
+            updateCart();
+          });
         });
-        card.querySelector('.remove-btn').addEventListener('click', () => {
-          cart.splice(index, 1);
-          updateCart();
-        });
-      });
 
-      cartTotal.textContent = total;
-    }
+        cartTotal.textContent = total;
+      }
 
-    function updateCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
+      function updateCart() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
       renderCart();
-    }
+    </script>
 
-    renderCart();
-  </script>
+    <!-- ⭐ CASHFREE SCRIPT -->
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 
-</body>
+    <!-- ⭐ CASHFREE PAYMENT LOGIC -->
+    <script>
+      document
+        .getElementById("pay-now-btn")
+        .addEventListener("click", async () => {
+          let amount = document.getElementById("cart-total").textContent;
+
+          if (!amount || amount == 0) {
+            alert("Your cart is empty");
+            return;
+          }
+
+          // Create order via backend
+          const res = await fetch("http://localhost:5000/create-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ amount: amount }),
+          });
+
+          const data = await res.json();
+
+          if (!data.success) {
+            alert("Payment could not be started");
+            return;
+          }
+
+          const cashfree = Cashfree({ mode: "sandbox" });
+
+          cashfree.checkout({
+            paymentSessionId: data.paymentSessionId,
+            redirectTarget: "_self",
+          });
+        });
+    </script>
+  </body>
 </html>

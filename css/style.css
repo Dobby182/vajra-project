@@ -3,7 +3,7 @@
 ================================ */
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   margin: 0;
   background-color: #fffef6;
   color: #2f2f2f;
@@ -39,7 +39,7 @@ body {
 }
 
 .navbar-left h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 26px;
   font-weight: 600;
   text-transform: lowercase;
@@ -69,7 +69,7 @@ body {
   position: absolute;
   background-color: #fffef8;
   min-width: 130px;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #d9c5a3;
   z-index: 10;
 }
@@ -120,6 +120,30 @@ body {
   width: 150px;
 }
 
+/* Make search input expand on focus for easier typing */
+.search-bar {
+  transition: all 0.18s ease;
+}
+.search-bar:focus-within {
+  border-bottom-color: #314d24;
+}
+.search-bar input:focus {
+  width: 220px;
+  background: #fffef6;
+}
+
+/* No results message shown when search matches nothing */
+.no-results {
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  margin: 18px 0 30px 0;
+  display: none;
+}
+.no-results.show {
+  display: block;
+}
+
 .navbar-icons a {
   color: #314d24;
   margin-left: 12px;
@@ -140,7 +164,7 @@ body {
 }
 
 .hero h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 38px;
   color: #314d24;
   margin-bottom: 15px;
@@ -154,7 +178,7 @@ body {
 .hero button {
   margin-top: 25px;
   padding: 10px 25px;
-  border: 1px ;
+  border: 1px;
   background: transparent;
   color: #8e95cb;
   cursor: pointer;
@@ -175,7 +199,7 @@ body {
 }
 
 .bestsellers h3 {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 26px;
   margin-bottom: 40px;
   color: #314d24;
@@ -193,7 +217,7 @@ body {
   border: 1px solid #e2d3b8;
   border-radius: 1px;
   background-color: #fffef8;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   padding: 20px;
   transition: transform 0.3s ease;
 }
@@ -223,7 +247,7 @@ body {
 }
 
 .our-promise h2 {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 26px;
   margin-bottom: 40px;
   color: #2f5d3a;
@@ -234,22 +258,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px;              /* Spacing between icons */
-  flex-wrap: wrap;        /* Allows wrap on smaller screens */
+  gap: 80px; /* Spacing between icons */
+  flex-wrap: wrap; /* Allows wrap on smaller screens */
   margin-top: 20px;
 }
 
 .promise-item {
   text-align: center;
-  width: 150px;           /* Controls equal sizing */
+  width: 150px; /* Controls equal sizing */
 }
 
 /* Resize images + make them green */
 .promise-item img {
-  width: 90px;            /* Smaller icon size */
+  width: 90px; /* Smaller icon size */
   height: 90px;
   object-fit: contain;
-  filter: invert(40%) sepia(20%) saturate(600%) hue-rotate(50deg);  
+  filter: invert(40%) sepia(20%) saturate(600%) hue-rotate(50deg);
   /* This filter turns blue → green */
 }
 
@@ -259,8 +283,6 @@ body {
   font-size: 14px;
   color: #2f5d3a;
 }
-
-
 
 /* ================================
    CONTACT PAGE
@@ -272,7 +294,7 @@ body {
 }
 
 .contact-section h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 32px;
   color: #314d24;
   margin-bottom: 20px;
@@ -291,7 +313,7 @@ body {
   padding: 30px 40px;
   border: 1px solid #e2d3b8;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: left;
 }
 
@@ -341,14 +363,14 @@ body {
   background: white;
   padding: 20px;
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: center;
   transition: 0.3s ease;
 }
 
 .category-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
 .category-card img {
@@ -428,7 +450,7 @@ body {
 
 /* Add to cart button */
 .category-card .add-to-cart {
-  background-color: #23572b;;
+  background-color: #23572b;
   color: white;
   border-radius: 1px;
   border: none;
@@ -458,6 +480,28 @@ body {
   background-color: #fce4e4;
 }
 
+/* Liked state + hover animation */
+.category-card .like-btn {
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    color 0.18s ease, border-color 0.18s ease;
+}
+
+.category-card .like-btn:hover {
+  transform: scale(1.04);
+}
+
+.category-card .like-btn.liked {
+  background-color: #fff0f0; /* pale red */
+  border-color: #ff6b6b;
+  color: #e63946; /* heart red */
+  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.12);
+  transform: scale(1.06);
+}
+
+.category-card .like-btn.liked:hover {
+  transform: scale(1.08);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .category-container {
@@ -482,13 +526,13 @@ body {
 /* Hero Explore Button */
 .hero .explore-btn {
   background-color: #3c613d; /* Green background */
-  color: white;              /* White text */
-  border: none;              /* Remove border */
-  padding: 12px 30px;        /* Size of the button */
-  font-size: 16px;           /* Text size */
-  font-weight: 600;          /* Bold text */
-  border-radius: 8px;        /* Rounded corners */
-  cursor: pointer;           /* Pointer on hover */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 12px 30px; /* Size of the button */
+  font-size: 16px; /* Text size */
+  font-weight: 600; /* Bold text */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
   transition: 0.3s ease;
 }
 

@@ -1,98 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us | Vajra Naturals</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | Vajra Naturals</title>
 
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/vajralogo.png"
+    />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="images/vajralogo.png">
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- External CSS (same theme as homepage) -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
+  <body>
+    <!-- Top Banner -->
+    <div class="top-banner">Get extra 10% off on your first order</div>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-left">
+          <h1 class="playfair-font">vajra</h1>
 
+          <div class="nav-links">
+            <a href="index.html">HOME</a>
 
-  <!-- External CSS (same theme as homepage) -->
-  <link rel="stylesheet" href="css/style.css">
-</head>
-
-
-<body>
-
-
-  <!-- Top Banner -->
-  <div class="top-banner">Get extra 10% off on your first order</div>
-
-
-  <!-- Navbar -->
-  <header>
-    <nav class="navbar">
-      <div class="navbar-left">
-        <h1 class="playfair-font">vajra</h1>
-
-
-        <div class="nav-links">
-          <a href="index.html">HOME</a>
-
-
-          <div class="dropdown">
-            <a href="#">CATEGORIES</a>
-            <div class="dropdown-content">
-              <a href="hair.html">HAIR</a>
-              <a href="skin.html">SKIN</a>
-              <a href="food.html">FOOD</a>
+            <div class="dropdown">
+              <a href="#">CATEGORIES</a>
+              <div class="dropdown-content">
+                <a href="/category/hair.html">HAIR</a>
+                <a href="/category/skin.html">SKIN</a>
+                <a href="/category/food.html">FOOD</a>
+              </div>
             </div>
+
+            <a href="reviews.html">REVIEWS</a>
+            <a href="contact.html" style="color: #314d24; font-weight: 600"
+              >CONTACT</a
+            >
           </div>
+        </div>
 
+        <div class="navbar-right-group">
+          <form class="search-bar">
+            <i class="fa fa-search"></i>
+            <input type="text" required />
+          </form>
 
-          <a href="reviews.html">REVIEWS</a>
-          <a href="contact.html" style="color:#314d24; font-weight:600;">CONTACT</a>
+          <div class="navbar-icons">
+            <a href="#"><i class="far fa-heart"></i></a>
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="login.html"><i class="far fa-user-circle"></i></a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <h2 class="libre-font">CONTACT US</h2>
+
+      <div class="contact-container">
+        <!-- Left Column -->
+        <div class="contact-info">
+          <p>
+            <i class="fa-solid fa-building"></i> <strong>Vajra Naturals</strong>
+          </p>
+          <p><i class="fa-solid fa-location-dot"></i> Coimbatore, Tamil Nadu</p>
+          <p><i class="fa-solid fa-envelope"></i> vajra@gmail.com</p>
+          <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
         </div>
       </div>
-
-
-      <div class="navbar-right-group">
-        <form class="search-bar">
-          <i class="fa fa-search"></i>
-          <input type="text" required>
-        </form>
-
-
-        <div class="navbar-icons">
-          <a href="#"><i class="far fa-heart"></i></a>
-          <a href="#"><i class="fas fa-shopping-cart"></i></a>
-          <a href="login.html"><i class="far fa-user-circle"></i></a>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-
-  <!-- Contact Section -->
-  <section class="contact-section">
-    <h2 class="libre-font">CONTACT US</h2>
-
-
-    <div class="contact-container">
-     
-      <!-- Left Column -->
-      <div class="contact-info">
-        <p><i class="fa-solid fa-building"></i> <strong>Vajra Naturals</strong></p>
-        <p><i class="fa-solid fa-location-dot"></i> Coimbatore, Tamil Nadu</p>
-        <p><i class="fa-solid fa-envelope"></i> vajra@gmail.com</p>
-        <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
-      </div>
-
-
-    </div>
-  </section>
-
-
-</body>
+    </section>
+  </body>
 </html>
