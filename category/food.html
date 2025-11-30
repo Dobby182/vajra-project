@@ -61,8 +61,8 @@
           </form>
 
           <div class="navbar-icons">
-            <a href="#"><i class="far fa-heart"></i></a>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a href="../wishlist.html"><i class="far fa-heart"></i></a>
+            <a href="../cart.html"><i class="fas fa-shopping-cart"></i></a>
             <a href="../login.html"><i class="far fa-user-circle"></i></a>
           </div>
         </div>
@@ -139,9 +139,29 @@
           const oldPrice = card
             .querySelector(".old-price")
             .textContent.replace("₹", "");
-          const img = card.querySelector("img").src;
+          // normalize image path for reliable display in cart
+          const imgAttr = card.querySelector("img")?.getAttribute("src") || "";
+          function normalizeImg(src) {
+            if (!src) return "";
+            if (
+              src.startsWith("http") ||
+              src.startsWith("//") ||
+              src.startsWith("/")
+            )
+              return src;
+            while (src.startsWith("../")) src = src.slice(3);
+            if (src.startsWith("./")) src = src.slice(2);
+            if (!src.startsWith("/")) src = "/" + src;
+            return src;
+          }
+          const img = normalizeImg(imgAttr);
           const quantity = parseInt(card.querySelector("input").value);
-          const ratings = card.querySelector(".ratings").textContent;
+          // ratings: use visible rating if present, otherwise generate simple random 4.0-5.0
+          let ratings = card.querySelector(".ratings")?.textContent || "";
+          if (!ratings) {
+            const val = (4 + Math.random()).toFixed(1);
+            ratings = `${val}/5`;
+          }
 
           let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -194,5 +214,7 @@
         if (icon) icon.addEventListener("click", () => searchInput.focus());
       }
     </script>
+    </script>
+    <footer class="site-footer">© VAJRA NATURALS</footer>
   </body>
 </html>

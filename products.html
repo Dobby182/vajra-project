@@ -395,8 +395,11 @@
             card
               .querySelector(".old-price")
               ?.textContent.replace(/[^0-9]/g, "") || "0";
-          const img = card.querySelector("img").src;
+          // normalize image path so it works from any page
+          const imgAttr = card.querySelector("img")?.getAttribute("src") || "";
+          const img = window.__site.normalizeImg(imgAttr);
           const quantity = parseInt(card.querySelector("input").value);
+          const ratings = card.querySelector(".ratings")?.textContent || "";
 
           let existing = cart.find((item) => item.name === name);
 
@@ -409,6 +412,7 @@
               oldPrice: oldPrice,
               img: img,
               quantity: quantity,
+              ratings: ratings,
             });
           }
 
@@ -473,5 +477,7 @@
         }
       })();
     </script>
-  </body>
-</html>
+
+      <footer class="site-footer">© VAJRA NATURALS</footer>
+    </body>
+  </html>

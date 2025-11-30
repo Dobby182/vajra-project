@@ -2,6 +2,10 @@
 (function () {
   // Normalize liked and cart data from older formats
   function normalizeLiked() {
+    if (localStorage.getItem("migration_v2_complete")) {
+      return JSON.parse(localStorage.getItem("liked")) || [];
+    }
+
     let liked = JSON.parse(localStorage.getItem("liked")) || [];
     const legacyMap =
       JSON.parse(localStorage.getItem("productLikes_v1")) || null;
@@ -30,8 +34,8 @@
       if (oldPrice && price.endsWith(oldPrice)) {
         price = price.slice(0, price.length - oldPrice.length);
       }
-      price = price.replace(/[^0-9]/g, "").trim();
-      oldPrice = oldPrice.replace(/[^0-9]/g, "").trim();
+      price = price.replace(/\D/g, "").trim();
+      oldPrice = oldPrice.replace(/\D/g, "").trim();
       return { ...item, price: price ? parseInt(price, 10) : 0, oldPrice };
     });
 
@@ -40,6 +44,10 @@
   }
 
   function normalizeCart() {
+    if (localStorage.getItem("migration_v2_complete")) {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.map((item) => {
       let price = item.price ?? "";
@@ -50,15 +58,44 @@
       if (oldPrice && price.endsWith(oldPrice)) {
         price = price.slice(0, price.length - oldPrice.length);
       }
-      price = parseInt(price.replace(/[^0-9]/g, "").trim()) || 0;
+      price = parseInt(price.replace(/\D/g, "").trim()) || 0;
       oldPrice = oldPrice
         .toString()
-        .replace(/[^0-9]/g, "")
+        .replace(/\D/g, "")
         .trim();
-      return { ...item, price, oldPrice };
+      // normalize image path to root-relative if needed
+      let img = item.img || "";
+      img = normalizeImg(img);
+      
+      // ensure ratings exists (generate default between 4.0 and 5.0)
+      let ratings = item.ratings || "";
+      if (!ratings) {
+        const val = Math.round((4 + Math.random()) * 10) / 10; // 4.0 - 5.0
+        const full = Math.floor(val);
+        const stars = "★".repeat(full) + "☆".repeat(5 - full);
+        ratings = `${stars} (${val}/5)`;
+      }
+      return { ...item, price, oldPrice, img, ratings };
     });
     localStorage.setItem("cart", JSON.stringify(cart));
     return cart;
+  }
+
+  function normalizeImg(src) {
+    if (!src) return "";
+    if (typeof src !== "string") return "";
+    src = src.trim();
+    if (
+      src.startsWith("http") ||
+      src.startsWith("//") ||
+      src.startsWith("/")
+    ) {
+      return src;
+    }
+    while (src.startsWith("../")) src = src.slice(3);
+    if (src.startsWith("./")) src = src.slice(2);
+    if (!src.startsWith("/")) src = "/" + src;
+    return src;
   }
 
   // Expose helper functions
@@ -66,8 +103,11 @@
   window.__site.migrate = function () {
     const liked = normalizeLiked();
     const cart = normalizeCart();
+    localStorage.setItem("migration_v2_complete", "true");
     return { liked, cart };
   };
+
+  window.__site.normalizeImg = normalizeImg;
 
   window.__site.getLiked = function () {
     return JSON.parse(localStorage.getItem("liked")) || [];

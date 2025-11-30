@@ -22,7 +22,6 @@ mongoose
   .then(() => {
     console.log("MongoDB Connected Successfully");
     console.log("Connected to MongoDB at:", MONGO_URI);
-    console.log("Copy this into MongoDB Compass.");
   })
   .catch((err) => console.log("MongoDB Connection Error:", err));
 
@@ -35,10 +34,7 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("users", UserSchema);
 
-// ⭐ TEST API
-app.get("/api/test", (req, res) => {
-  res.json({ message: "API Working Fine" });
-});
+
 
 // ⭐ REGISTER API
 app.post("/api/register", async (req, res) => {
@@ -105,7 +101,6 @@ app.post("/create-order", async (req, res) => {
           customer_phone: "9999999999",
         },
 
-        // FIXED RETURN URL (no placeholders, works 100%)
         order_meta: {
           return_url: "http://localhost:5000/success.html",
           notify_url: "",

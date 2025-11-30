@@ -107,46 +107,53 @@
       </button>
     </div>
 
+    <script src="js/site.js"></script>
     <script>
-      // Get cart data from localStorage
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+      // Cart rendering and controls
       const cartContainer = document.getElementById("cart-container");
       const cartTotal = document.getElementById("cart-total");
+
+      // Use shared migration/helper to ensure data is clean
+      let cart = window.__site ? window.__site.migrate().cart : (JSON.parse(localStorage.getItem("cart")) || []);
 
       function renderCart() {
         cartContainer.innerHTML = "";
         let total = 0;
 
         cart.forEach((item, index) => {
-          total += item.price * item.quantity;
+          total += (item.price || 0) * (item.quantity || 0);
 
           const card = document.createElement("div");
           card.className = "category-card";
+          
+          const img = window.__site ? window.__site.normalizeImg(item.img) : (item.img || "");
+
           card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}">
-          <h3>${item.name}</h3>
-          <div class="ratings">${item.ratings}</div>
-          <p>₹${item.price} <span class="old-price">₹${item.oldPrice}</span></p>
+          <img src="${img}" alt="${item.name || ""}">
+          <h3>${item.name || ""}</h3>
+          <div class="ratings">${item.ratings ? item.ratings : ""}</div>
+          <p>₹${item.price || 0} <span class="old-price">₹${
+            item.oldPrice || 0
+          }</span></p>
           <div class="quantity-selector">
             <button class="decrease">-</button>
-            <input type="number" value="${item.quantity}" min="1">
+            <input type="number" value="${item.quantity || 1}" min="1">
             <button class="increase">+</button>
           </div>
           <div class="actions">
-            <button class="remove-btn">Remove 🗑️</button>
+            <button class="remove-btn" aria-label="Remove item from cart">Remove</button>
           </div>
         `;
           cartContainer.appendChild(card);
 
           const input = card.querySelector("input");
           card.querySelector(".increase").addEventListener("click", () => {
-            item.quantity++;
+            item.quantity = (item.quantity || 0) + 1;
             input.value = item.quantity;
             updateCart();
           });
           card.querySelector(".decrease").addEventListener("click", () => {
-            if (item.quantity > 1) {
+            if ((item.quantity || 0) > 1) {
               item.quantity--;
               input.value = item.quantity;
               updateCart();
@@ -177,7 +184,8 @@
       document
         .getElementById("pay-now-btn")
         .addEventListener("click", async () => {
-          let amount = document.getElementById("cart-total").textContent;
+          let amount =
+            Number(document.getElementById("cart-total").textContent) || 0;
 
           if (!amount || amount == 0) {
             alert("Your cart is empty");
@@ -185,26 +193,52 @@
           }
 
           // Create order via backend
-          const res = await fetch("http://localhost:5000/create-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ amount: amount }),
-          });
+          try {
+            const res = await fetch("http://localhost:5000/create-order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ amount: amount }),
+            });
 
-          const data = await res.json();
+            const data = await res.json();
 
-          if (!data.success) {
-            alert("Payment could not be started");
-            return;
+            if (!data.success) {
+              alert("Payment could not be started");
+              return;
+            }
+
+            const cashfree = Cashfree({ mode: "sandbox" });
+
+            cashfree.checkout({
+              paymentSessionId: data.paymentSessionId,
+              redirectTarget: "_self",
+            });
+          } catch (err) {
+            console.error(err);
+            alert("Payment failed to start");
           }
-
-          const cashfree = Cashfree({ mode: "sandbox" });
-
-          cashfree.checkout({
-            paymentSessionId: data.paymentSessionId,
-            redirectTarget: "_self",
-          });
         });
     </script>
+
+    <style>
+      /* Polished Remove button for cart items */
+      .category-card .remove-btn {
+        background-color: #2e7d32;
+        color: #fff;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.2s, transform 0.08s;
+        min-width: 88px;
+      }
+      .category-card .remove-btn:hover {
+        background-color: #1b5e20;
+        transform: translateY(-1px);
+      }
+    </style>
+
+    <footer class="site-footer">© VAJRA NATURALS</footer>
   </body>
 </html>

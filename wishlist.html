@@ -42,7 +42,7 @@
             <a href="index.html">HOME</a>
             <a href="products.html">PRODUCTS</a>
             <div class="dropdown">
-              <a href="#">CATEGORIES <i class="fa fa-caret-down"></i></a>
+              <a href="#">CATEGORIES</a>
               <div class="dropdown-content">
                 <a href="/category/hair.html">HAIR</a>
                 <a href="/category/skin.html">SKIN</a>
@@ -54,15 +54,24 @@
           </div>
         </div>
 
-        <div class="navbar-right">
-          <form class="search-bar">
+        <!-- RIGHT SECTION -->
+        <div class="navbar-right-group">
+          <!-- Search Bar -->
+          <form class="search-bar" id="searchForm">
             <i class="fa fa-search"></i>
-            <input type="text" placeholder="Search products..." required />
+            <input
+              type="text"
+              id="searchInput"
+              required
+              placeholder="Search here..."
+            />
           </form>
 
-          <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
-          <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
-          <a href="login.html"><i class="fa-regular fa-circle-user"></i></a>
+          <div class="navbar-icons">
+            <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+            <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="login.html"><i class="fa-regular fa-circle-user"></i></a>
+          </div>
         </div>
       </nav>
     </header>
@@ -83,10 +92,11 @@
       </div>
     </section>
 
+    <script src="js/site.js"></script>
     <script>
-      // Get wishlist items from localStorage
-      let liked = JSON.parse(localStorage.getItem("liked")) || [];
       const wishlistContainer = document.getElementById("wishlist-container");
+      // Use shared helper to get liked items (already normalized)
+      let liked = window.__site ? window.__site.getLiked() : JSON.parse(localStorage.getItem("liked") || "[]");
 
       function renderWishlist() {
         wishlistContainer.innerHTML = "";
@@ -100,47 +110,43 @@
         liked.forEach((item, index) => {
           const card = document.createElement("div");
           card.className = "wishlist-card";
-          // sanitize stored price values: sometimes price was stored as concatenation of price+oldPrice
-          let displayPrice = item.price ?? "";
-          let displayOld = item.oldPrice ?? "";
-          displayPrice = displayPrice.toString();
-          displayOld = displayOld ? displayOld.toString() : "";
-          if (displayOld && displayPrice.endsWith(displayOld)) {
-            // split concatenated value (e.g. '280320' + old '320' => '280' and '320')
-            displayPrice = displayPrice.slice(
-              0,
-              displayPrice.length - displayOld.length
-            );
-          }
-          displayPrice = displayPrice.trim();
-          displayOld = displayOld.trim();
+          
+          // Data is already normalized by site.js
+          const displayPrice = item.price;
+          const displayOld = item.oldPrice;
+          // Use shared image normalization
+          const img = window.__site ? window.__site.normalizeImg(item.img) : item.img;
 
           card.innerHTML = `
-          <img src="${item.img}" alt="${item.name}">
+          <img src="${img}" alt="${item.name}">
           <h3>${item.name}</h3>
           <p>₹${displayPrice} <span class="old-price">${
             displayOld ? "₹" + displayOld : ""
           }</span></p>
           <div class="wishlist-actions">
-            <button class="remove-btn">Remove 🗑️</button>
+            <button class="remove-btn" aria-label="Remove item from wishlist">Remove</button>
           </div>
         `;
           wishlistContainer.appendChild(card);
 
           card.querySelector(".remove-btn").addEventListener("click", () => {
-            liked.splice(index, 1);
-            updateWishlist();
+             // Use shared toggle/remove if available, or manual splice
+             if (window.__site) {
+                 liked = window.__site.toggleLiked(item); // toggleLiked removes if exists
+             } else {
+                 liked.splice(index, 1);
+                 localStorage.setItem("liked", JSON.stringify(liked));
+             }
+             renderWishlist();
           });
         });
       }
 
-      function updateWishlist() {
-        localStorage.setItem("liked", JSON.stringify(liked));
-        renderWishlist();
-      }
-
       renderWishlist();
     </script>
+    <footer class="site-footer">© VAJRA NATURALS</footer>
+  </body>
+</html>
 
     <style>
       /* Hero section like homepage */
@@ -228,14 +234,17 @@
         background-color: #2e7d32; /* green */
         color: #fff;
         border: none;
-        padding: 8px 15px;
-        border-radius: 5px;
+        padding: 10px 18px;
+        border-radius: 20px;
         cursor: pointer;
-        transition: 0.3s;
+        transition: background-color 0.2s, transform 0.08s;
+        font-weight: 600;
+        min-width: 92px;
       }
 
       .wishlist-card .remove-btn:hover {
         background-color: #1b5e20;
+        transform: translateY(-1px);
       }
 
       .empty-msg {
@@ -243,39 +252,6 @@
         font-size: 18px;
         color: #1b451d;
         margin-top: 50px;
-      }
-
-      /* Navbar icons dark green */
-      .navbar-right a i {
-        color: #1b451d;
-        font-size: 20px;
-        margin-left: 15px;
-        transition: 0.3s;
-      }
-
-      .navbar-right a i:hover {
-        color: #2e7d32;
-      }
-
-      /* Search bar styling */
-      .search-bar {
-        display: flex;
-        align-items: center;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-        padding: 5px 10px;
-        margin-right: 10px;
-      }
-
-      .search-bar i {
-        color: #1b451d;
-        margin-right: 5px;
-      }
-
-      .search-bar input {
-        border: none;
-        outline: none;
-        font-size: 14px;
       }
     </style>
   </body>

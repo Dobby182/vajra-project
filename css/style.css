@@ -368,6 +368,12 @@ body {
   transition: 0.3s ease;
 }
 
+/* Make card a column flex so we can align actions to bottom for consistent heights */
+.category-card {
+  display: flex;
+  flex-direction: column;
+}
+
 .category-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
@@ -382,10 +388,17 @@ body {
 
 /* Product Name */
 .category-card h3 {
-  margin: 10px 0;
+  margin: 10px 0 8px 0;
   font-size: 20px;
   font-weight: 600;
   color: #222;
+  /* keep titles to max 2 lines for consistent card heights */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 48px; /* reserve space for two lines */
 }
 
 /* Price */
@@ -446,22 +459,44 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  /* push actions to bottom so cards align even when content height varies */
+  margin-top: auto;
 }
 
 /* Add to cart button */
 .category-card .add-to-cart {
   background-color: #23572b;
   color: white;
-  border-radius: 1px;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 18px;
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.08s;
+  min-width: 110px;
 }
 
 .category-card .add-to-cart:hover {
-  background-color: #43a047;
+  background-color: #1b5e20;
+  transform: translateY(-1px);
+}
+
+/* Polished Remove button (site-wide) */
+.remove-btn {
+  background-color: #2e7d32; /* green */
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.08s;
+  min-width: 88px;
+}
+.remove-btn:hover {
+  background-color: #1b5e20;
+  transform: translateY(-1px);
 }
 
 /* Like button */
@@ -538,4 +573,16 @@ body {
 
 .hero .explore-btn:hover {
   background-color: #3c613d; /* Darker green on hover */
+}
+
+/* Site-wide footer */
+.site-footer {
+  text-align: center;
+  padding: 18px 12px;
+  background-color: #fffaf0;
+  color: #314d24;
+  border-top: 1px solid #e2d3b8;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 40px;
 }
