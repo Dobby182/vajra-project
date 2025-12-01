@@ -66,7 +66,7 @@
       // normalize image path to root-relative if needed
       let img = item.img || "";
       img = normalizeImg(img);
-      
+
       // ensure ratings exists (generate default between 4.0 and 5.0)
       let ratings = item.ratings || "";
       if (!ratings) {
@@ -154,30 +154,48 @@
   };
 
   // Attach like button handlers to cards in a container
-  window.__site.attachLikeHandlers = function (
-    containerSelector = ".category-container"
-  ) {
-    const container = document.querySelector(containerSelector);
+  // ⭐ AUTH HELPER
+  window.__site.checkAuth = function () {
+    const userId = localStorage.getItem("userId");
+    if (!userId || userId === "undefined" || userId === "null") {
+      alert("Please login to continue");
+      window.location.href = "login.html";
+      return false;
+    }
+    return true;
+  };
+
+  window.__site.attachLikeHandlers = function (containerSelector) {
+    const container = containerSelector
+      ? document.querySelector(containerSelector)
+      : document;
     if (!container) return;
 
-    const cards = container.querySelectorAll(".category-card");
+    const cards = container.querySelectorAll(".product-card");
     cards.forEach((card) => {
+      const nameEl = card.querySelector("h3");
+      const priceEl = card.querySelector(".price");
+      const imgEl = card.querySelector("img");
       const likeBtn = card.querySelector(".like-btn");
-      if (!likeBtn) return;
 
-      // Extract product data
-      const name = card.querySelector("h3")?.textContent.trim();
-      const pEl = card.querySelector("p");
+      if (!nameEl || !priceEl || !imgEl || !likeBtn) return;
+
+      const name = nameEl.textContent.trim();
+      const priceText = priceEl.textContent.trim();
+      const img = imgEl.getAttribute("src");
+
+      // Parse price
       let price = 0;
-      if (pEl) {
-        const firstText = pEl.childNodes[0]?.textContent || "";
-        price = parseInt(firstText.replace(/[^0-9]/g, "").trim()) || 0;
+      let oldPrice = "";
+      const match = priceText.match(/Rs\.?\s*(\d+)/);
+      if (match) {
+        price = parseInt(match[1], 10);
       }
-      const oldPrice =
-        card.querySelector(".old-price")?.textContent.replace(/[^0-9]/g, "") ||
-        "";
-      const imgAttr = card.querySelector("img")?.getAttribute("src") || "";
-      const img = window.__site.normalizeImg(imgAttr);
+      // Try to find old price (strike)
+      const strike = priceEl.querySelector("strike");
+      if (strike) {
+        oldPrice = strike.textContent.trim();
+      }
 
       const product = { name, price, oldPrice, img };
 
@@ -188,14 +206,16 @@
         likeBtn.textContent = "🤍";
       }
 
-      // Add click listener
-      // Remove existing listeners by cloning (simple way to clear anonymous listeners)
-      // or just assume we are replacing the logic. 
-      // Since we are refactoring, we will remove the inline logic in HTML files.
-      
-      likeBtn.onclick = function() {
-        window.__site.toggleLiked(product);
-        if (window.__site.isLiked(name)) {
+      // Click handler
+      likeBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // ⭐ AUTH GUARD
+        if (!window.__site.checkAuth()) return;
+
+        const updatedLiked = window.__site.toggleLiked(product);
+        if (updatedLiked.some((x) => x.name === name)) {
           likeBtn.textContent = "❤️";
         } else {
           likeBtn.textContent = "🤍";

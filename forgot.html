@@ -1,97 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forgot Password | Vajra Naturals</title>
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="images/vajralogo.png"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password | Vajra Naturals</title>
 
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/vajralogo.png" />
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
 
-    <!-- External CSS (same as login page) -->
-    <link rel="stylesheet" href="css/stylelogin.css" />
-  </head>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <body>
-    <!-- Top Banner -->
-    <div class="top-banner">Get extra 10% off on your first order</div>
+  <!-- External CSS (same as login page) -->
+  <link rel="stylesheet" href="css/stylelogin.css" />
+</head>
 
-    <!-- Navbar -->
-    <header>
-      <nav class="navbar">
-        <div class="navbar-left">
-          <h1 class="playfair-font">vajra</h1>
-          <div class="nav-links">
-            <a href="index.html">HOME</a>
-            <div class="dropdown">
-              <a href="#">CATEGORIES</a>
-              <div class="dropdown-content">
-                <a href="/category/hair.html">HAIR</a>
-                <a href="/category/skin.html">SKIN</a>
-                <a href="/category/food.html">FOOD</a>
-              </div>
+<body>
+  <!-- Top Banner -->
+  <div class="top-banner">Get extra 10% off on your first order</div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <h1 class="playfair-font">vajra</h1>
+        <div class="nav-links">
+          <a href="index.html">HOME</a>
+          <div class="dropdown">
+            <a href="#">CATEGORIES</a>
+            <div class="dropdown-content">
+              <a href="/category/hair.html">HAIR</a>
+              <a href="/category/skin.html">SKIN</a>
+              <a href="/category/food.html">FOOD</a>
             </div>
-            <a href="reviews.html">REVIEWS</a>
-            <a href="contact.html">CONTACT</a>
           </div>
+          <a href="reviews.html">REVIEWS</a>
+          <a href="contact.html">CONTACT</a>
         </div>
-
-        <div class="navbar-right-group">
-          <form class="search-bar">
-            <i class="fa fa-search"></i>
-            <input type="text" required />
-          </form>
-
-          <div class="navbar-icons">
-            <a href="#"><i class="far fa-heart"></i></a>
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
-            <a href="login.html"><i class="far fa-user-circle"></i></a>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <!-- Forgot Password Section -->
-    <section class="login-container">
-      <div class="login-box">
-        <h2 class="playfair-font">Forgot Password</h2>
-
-        <form action="#" method="POST">
-          <p style="font-size: 14px; margin-bottom: 20px; color: #314d24">
-            Enter your registered email address and we will send you a link to
-            reset your password.
-          </p>
-
-          <input type="email" name="email" placeholder="Email" required />
-
-          <div class="login-links">
-            <a href="login.html">Back to Login</a>
-            <a href="register.html">Create new account</a>
-          </div>
-
-          <button type="submit">Send Reset Link</button>
-        </form>
       </div>
-    </section>
-      <footer class="site-footer">© VAJRA NATURALS</footer>
-    </body>
-  </html>
-  </body>
+
+      <div class="navbar-right-group">
+        <form class="search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text" required />
+        </form>
+
+        <div class="navbar-icons">
+          <a href="#"><i class="far fa-heart"></i></a>
+          <a href="#"><i class="fas fa-shopping-cart"></i></a>
+          <a href="login.html"><i class="far fa-user-circle"></i></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Forgot Password Section -->
+  <section class="login-container">
+    <div class="login-box">
+      <h2 class="playfair-font">Forgot Password</h2>
+
+      <!-- STEP 1: Request OTP -->
+      <form id="step1-form">
+        <p style="font-size: 14px; margin-bottom: 20px; color: #314d24">
+          Enter your registered email address and we will send you a 4-digit OTP
+          to reset your password.
+        </p>
+        <input type="email" id="reset-email" placeholder="Email" required />
+        <button type="submit">Send OTP</button>
+      </form>
+
+      <!-- STEP 2: Verify OTP & Reset -->
+      <form id="step2-form" style="display: none;">
+        <p style="font-size: 14px; margin-bottom: 20px; color: #314d24">
+          Enter the OTP sent to your email and your new password.
+        </p>
+        <input type="text" id="otp-input" placeholder="Enter 4-digit OTP" required />
+        <input type="password" id="new-password" placeholder="New Password" required />
+        <button type="submit">Reset Password</button>
+      </form>
+
+      <div class="login-links">
+        <a href="login.html">Back to Login</a>
+        <a href="register.html">Create new account</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const step1Form = document.getElementById("step1-form");
+    const step2Form = document.getElementById("step2-form");
+    let userEmail = "";
+
+    // Step 1: Send OTP
+    step1Form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("reset-email").value;
+
+      try {
+        const res = await fetch("http://localhost:5000/api/forgot-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("OTP sent to your email");
+          userEmail = email;
+          step1Form.style.display = "none";
+          step2Form.style.display = "block";
+        } else {
+          alert(data.message);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error");
+      }
+    });
+
+    // Step 2: Reset Password
+    step2Form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const otp = document.getElementById("otp-input").value;
+      const newPassword = document.getElementById("new-password").value;
+
+      try {
+        const res = await fetch("http://localhost:5000/api/reset-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: userEmail, otp, newPassword }),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("Password reset successful! Please login.");
+          window.location.href = "login.html";
+        } else {
+          alert(data.message);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Server error");
+      }
+    });
+  </script>
+  <footer class="site-footer">© VAJRA NATURALS</footer>
+</body>
+
+</html>
+</body>
+
 </html>

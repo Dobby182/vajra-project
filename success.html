@@ -1,50 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payment Successful</title>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f1f8f1;
-        text-align: center;
-        padding: 60px;
-      }
-      .box {
-        background: white;
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: inline-block;
-      }
-      h1 {
-        color: green;
-        font-size: 40px;
-      }
-      p {
-        font-size: 18px;
-        margin-top: 10px;
-      }
-      a {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 25px;
-        background: black;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-      }
-    </style>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful | Vajra Naturals</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/vajralogo.png" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background-color: #fffaf0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .message-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .box {
+      background: white;
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      max-width: 500px;
+      border: 1px solid #e2d3b8;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      color: #2e7d32;
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #314d24;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #2e7d32;
+    }
+
+    .icon-circle {
+      width: 80px;
+      height: 80px;
+      background: #e8f5e9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .icon-circle i {
+      font-size: 40px;
+      color: #2e7d32;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- Navbar (Optional, keeping it simple for now, just the message) -->
+
+  <div class="message-container">
     <div class="box">
-      <h1>✔ Payment Successful</h1>
-      <p>Thank you! Your order is confirmed.</p>
-      <a href="products.html">Continue Shopping</a>
+      <div class="icon-circle">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h1>Payment Successful</h1>
+      <p id="status-msg">Verifying your payment...</p>
+      <a href="index.html" class="btn">Continue Shopping</a>
     </div>
+  </div>
 
-    <footer class="site-footer">© VAJRA NATURALS</footer>
-  </body>
+  <footer class="site-footer">© VAJRA NATURALS</footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get("order_id");
+      const statusMsg = document.getElementById("status-msg");
+
+      if (orderId) {
+        try {
+          const res = await fetch("http://localhost:5000/api/verify-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ orderId }),
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            statusMsg.textContent = "Thank you for your purchase! Your order has been confirmed.";
+            // Clear cart
+            localStorage.removeItem("cart");
+          } else {
+            statusMsg.textContent = "Order recorded, but verification failed: " + data.message;
+            statusMsg.style.color = "orange";
+          }
+        } catch (err) {
+          console.error(err);
+          statusMsg.textContent = "Order recorded. Please check your profile for status.";
+        }
+      } else {
+        statusMsg.textContent = "Thank you for your purchase!";
+      }
+    });
+  </script>
+</body>
+
 </html>

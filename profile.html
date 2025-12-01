@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile | Vajra Naturals</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="images/vajralogo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .profile-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        .profile-sidebar {
+            background: #fffaf0;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2d3b8;
+            height: fit-content;
+        }
+
+        .profile-sidebar h3 {
+            font-family: "Playfair Display", serif;
+            color: #314d24;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .user-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .logout-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #c9302c;
+        }
+
+        .profile-content h2 {
+            font-family: "Playfair Display", serif;
+            color: #314d24;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e2d3b8;
+            padding-bottom: 10px;
+        }
+
+        .section-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-card h3 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Address List */
+        .address-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .address-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #314d24;
+        }
+
+        /* Order List */
+        .order-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .order-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .order-status {
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .status-success {
+            color: #2e7d32;
+        }
+
+        .status-pending {
+            color: #f0ad4e;
+        }
+
+        .status-failed {
+            color: #d9534f;
+        }
+
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .order-product {
+            display: flex;
+            justify-content: space-between;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <h1 class="playfair-font">Vajra</h1>
+                <div class="nav-links">
+                    <a href="index.html">HOME</a>
+                    <div class="dropdown">
+                        <a href="#">CATEGORIES</a>
+                        <div class="dropdown-content">
+                            <a href="/category/hair.html">HAIR</a>
+                            <a href="/category/skin.html">SKIN</a>
+                            <a href="/category/food.html">FOOD</a>
+                        </div>
+                    </div>
+                    <a href="reviews.html">REVIEWS</a>
+                    <a href="contact.html">CONTACT</a>
+                </div>
+            </div>
+
+            <div class="navbar-right-group">
+                <div class="navbar-icons">
+                    <a href="wishlist.html"><i class="fa-regular fa-heart"></i></a>
+                    <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="profile.html" class="active"><i class="fa-regular fa-circle-user"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <!-- Sidebar -->
+        <aside class="profile-sidebar">
+            <h3>My Account</h3>
+            <div class="user-info">
+                <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+                <!-- Email could be fetched if we had an API for full user details,
+               for now we use localStorage name or fetch from orders -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="profile-content">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2d3b8; padding-bottom: 10px; margin-bottom: 25px;">
+                <h2 style="border: none; margin: 0;">My Dashboard</h2>
+                <button class="logout-btn" onclick="logout()" style="margin: 0; background: #d9534f;">Logout</button>
+            </div>
+
+            <!-- Saved Addresses -->
+            <section>
+                <h2 style="font-size: 20px; border-bottom: 1px solid #eee;">Saved Addresses</h2>
+                <div class="section-card">
+                    <div id="address-list" class="address-list">
+                        <p>Loading addresses...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order History -->
+            <section>
+                <h2>Order History</h2>
+                <div class="section-card">
+                    <div id="order-list" class="order-list">
+                        <p>Loading orders...</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="site-footer">© VAJRA NATURALS</footer>
+
+    <script src="js/site.js"></script>
+    <script>
+        // Check Auth on Load
+        const userId = localStorage.getItem("userId");
+        const userName = localStorage.getItem("userName");
+
+        if (!userId || userId === "undefined" || userId === "null") {
+            window.location.href = "login.html";
+        } else {
+            document.getElementById("user-name").textContent = (userName && userName !== "undefined") ? userName : "User";
+            loadData();
+        }
+
+        function logout() {
+            localStorage.removeItem("userId");
+            localStorage.removeItem("userName");
+            localStorage.removeItem("savedAddresses"); // Optional: clear local cache
+            window.location.href = "login.html";
+        }
+
+        async function loadData() {
+            // 1. Fetch Addresses
+            try {
+                const res = await fetch(`http://localhost:5000/api/get-addresses/${userId}`);
+                const data = await res.json();
+                renderAddresses(data.addresses || []);
+            } catch (err) {
+                console.error(err);
+                document.getElementById("address-list").innerHTML = "<p>Failed to load addresses.</p>";
+            }
+
+            // 2. Fetch Orders
+            try {
+                const res = await fetch(`http://localhost:5000/api/get-orders/${userId}`);
+                const data = await res.json();
+                renderOrders(data.orders || []);
+            } catch (err) {
+                console.error(err);
+                document.getElementById("order-list").innerHTML = "<p>Failed to load orders.</p>";
+            }
+        }
+
+        function renderAddresses(addresses) {
+            const container = document.getElementById("address-list");
+            if (addresses.length === 0) {
+                container.innerHTML = "<p>No saved addresses found.</p>";
+                return;
+            }
+            container.innerHTML = addresses.map(addr => `
+          <div class="address-item">
+            <strong>${addr.name}</strong><br>
+            ${addr.line1}, ${addr.city}<br>
+            ${addr.state} - ${addr.zip}<br>
+            Phone: ${addr.phone}
+          </div>
+        `).join("");
+        }
+
+        function renderOrders(orders) {
+            const container = document.getElementById("order-list");
+            // Sort by date desc
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (orders.length === 0) {
+                container.innerHTML = "<p>No orders found.</p>";
+                return;
+            }
+
+            container.innerHTML = orders.map(order => {
+                const date = new Date(order.date).toLocaleDateString();
+                const statusClass = `status-${order.status}`;
+
+                const itemsHtml = order.items.map(item => `
+            <div class="order-product">
+              <span>${item.name} (x${item.qty || 1})</span>
+              <span>Rs. ${item.price}</span>
+            </div>
+          `).join("");
+
+                return `
+            <div class="order-item">
+              <div class="order-header">
+                <span>Order ID: ${order.orderId}</span>
+                <span>${date}</span>
+                <span class="order-status ${statusClass}">${order.status}</span>
+              </div>
+              <div class="order-items">
+                ${itemsHtml}
+                <div class="order-product" style="border-top:1px solid #eee; margin-top:10px; padding-top:5px; font-weight:600;">
+                  <span>Total</span>
+                  <span>Rs. ${order.amount}</span>
+                </div>
+              </div>
+            </div>
+          `;
+            }).join("");
+        }
+    </script>
+</body>
+
+</html>
