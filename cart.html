@@ -1,99 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart - Vajra Naturals</title>
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../images/vajralogo.png"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - Vajra Naturals</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/vajralogo.png" />
 
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet" />
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <!-- Top Banner -->
-    <div class="top-banner">Get extra 10% off on your first order</div>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- Navbar -->
-    <header>
-      <nav class="navbar">
-        <div class="navbar-left">
-          <h1 class="playfair-font">vajra</h1>
-          <div class="nav-links">
-            <a href="../index.html">HOME</a>
-            <a href="../products.html">PRODUCTS</a>
-            <div class="dropdown">
-              <a href="#">CATEGORIES</a>
-              <div class="dropdown-content">
-                <a href="/category/hair.html">HAIR</a>
-                <a href="/category/skin.html">SKIN</a>
-                <a href="/category/food.html">FOOD</a>
-              </div>
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <!-- Top Banner -->
+  <div class="top-banner">Get extra 10% off on your first order</div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <h1 class="playfair-font">vajra</h1>
+        <div class="nav-links">
+          <a href="../index.html">HOME</a>
+          <a href="../products.html">PRODUCTS</a>
+          <div class="dropdown">
+            <a href="#">CATEGORIES</a>
+            <div class="dropdown-content">
+              <a href="/category/hair.html">HAIR</a>
+              <a href="/category/skin.html">SKIN</a>
+              <a href="/category/food.html">FOOD</a>
             </div>
-            <a href="../reviews.html">REVIEWS</a>
-            <a href="../contact.html">CONTACT</a>
           </div>
+          <a href="../reviews.html">REVIEWS</a>
+          <a href="../contact.html">CONTACT</a>
         </div>
+      </div>
 
-        <div class="navbar-right-group">
-          <form class="search-bar">
-            <i class="fa fa-search"></i>
-            <input type="text" placeholder="Search products..." required />
-          </form>
+      <div class="navbar-right-group">
+        <form class="search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text" placeholder="Search products..." required />
+        </form>
 
-          <div class="navbar-icons">
-            <a href="../wishlist.html"><i class="far fa-heart"></i></a>
-            <a href="../cart.html"><i class="fas fa-shopping-cart"></i></a>
-            <a href="../login.html"><i class="far fa-user-circle"></i></a>
-          </div>
+        <div class="navbar-icons">
+          <a href="../wishlist.html"><i class="far fa-heart"></i></a>
+          <a href="../cart.html"><i class="fas fa-shopping-cart"></i></a>
+          <a href="../login.html"><i class="far fa-user-circle"></i></a>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Cart Title -->
-    <h2 class="category-title">Your Cart</h2>
+  <!-- Cart Title -->
+  <h2 class="category-title">Your Cart</h2>
 
-    <!-- Cart Container -->
-    <div class="category-container" id="cart-container">
-      <!-- Cart items will appear here dynamically -->
-    </div>
+  <!-- Cart Container -->
+  <div class="category-container" id="cart-container">
+    <!-- Cart items will appear here dynamically -->
+  </div>
 
-    <!-- Total Price -->
-    <div
-      style="
+  <!-- Total Price -->
+  <div style="
         text-align: center;
         margin: 30px 0;
         font-size: 20px;
         font-weight: 600;
-      "
-    >
-      Total: ₹<span id="cart-total">0</span>
-    </div>
+      ">
+    Total: ₹<span id="cart-total">0</span>
+  </div>
 
-    <!-- ⭐ PAY NOW BUTTON -->
-    <div style="text-align: center; margin-bottom: 40px">
-      <button
-        id="pay-now-btn"
-        style="
+  <!-- ⭐ PAY NOW BUTTON -->
+  <div style="text-align: center; margin-bottom: 40px">
+    <button id="pay-now-btn" style="
           padding: 12px 30px;
           font-size: 18px;
           cursor: pointer;
@@ -101,39 +90,76 @@
           color: white;
           border: none;
           border-radius: 5px;
-        "
-      >
-        Pay Now
-      </button>
+        ">
+      Pay Now
+    </button>
+  </div>
+
+  <!-- ADDRESS MODAL -->
+  <div id="address-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Delivery Address</h3>
+      <form id="address-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="addr-name" required />
+        </div>
+        <div class="form-group">
+          <label>Address Line 1</label>
+          <input type="text" id="addr-line1" required />
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" id="addr-city" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>State</label>
+            <input type="text" id="addr-state" required />
+          </div>
+          <div class="form-group">
+            <label>Zip Code</label>
+            <input type="text" id="addr-zip" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="addr-phone" required />
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancel-addr-btn" class="cancel-btn">Cancel</button>
+          <button type="submit" class="confirm-btn">Proceed to Pay</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <script src="js/site.js"></script>
-    <script>
-      // Cart rendering and controls
-      const cartContainer = document.getElementById("cart-container");
-      const cartTotal = document.getElementById("cart-total");
+  <script src="js/site.js"></script>
+  <script>
+    // Cart rendering and controls
+    const cartContainer = document.getElementById("cart-container");
+    const cartTotal = document.getElementById("cart-total");
 
-      // Use shared migration/helper to ensure data is clean
-      let cart = window.__site ? window.__site.migrate().cart : (JSON.parse(localStorage.getItem("cart")) || []);
+    // Use shared migration/helper to ensure data is clean
+    let cart = window.__site ? window.__site.migrate().cart : (JSON.parse(localStorage.getItem("cart")) || []);
 
-      function renderCart() {
-        cartContainer.innerHTML = "";
-        let total = 0;
+    function renderCart() {
+      cartContainer.innerHTML = "";
+      let total = 0;
 
-        cart.forEach((item, index) => {
-          total += (item.price || 0) * (item.quantity || 0);
+      cart.forEach((item, index) => {
+        total += (item.price || 0) * (item.quantity || 0);
 
-          const card = document.createElement("div");
-          card.className = "category-card";
-          
-          const img = window.__site ? window.__site.normalizeImg(item.img) : (item.img || "");
+        const card = document.createElement("div");
+        card.className = "category-card";
 
-          card.innerHTML = `
+        const img = window.__site ? window.__site.normalizeImg(item.img) : (item.img || "");
+
+        card.innerHTML = `
           <img src="${img}" alt="${item.name || ""}">
           <h3>${item.name || ""}</h3>
           <div class="ratings">${item.ratings ? item.ratings : ""}</div>
-          <p>₹${item.price || 0} <span class="old-price">₹${
-            item.oldPrice || 0
+          <p>₹${item.price || 0} <span class="old-price">₹${item.oldPrice || 0
           }</span></p>
           <div class="quantity-selector">
             <button class="decrease">-</button>
@@ -144,101 +170,224 @@
             <button class="remove-btn" aria-label="Remove item from cart">Remove</button>
           </div>
         `;
-          cartContainer.appendChild(card);
+        cartContainer.appendChild(card);
 
-          const input = card.querySelector("input");
-          card.querySelector(".increase").addEventListener("click", () => {
-            item.quantity = (item.quantity || 0) + 1;
+        const input = card.querySelector("input");
+        card.querySelector(".increase").addEventListener("click", () => {
+          item.quantity = (item.quantity || 0) + 1;
+          input.value = item.quantity;
+          updateCart();
+        });
+        card.querySelector(".decrease").addEventListener("click", () => {
+          if ((item.quantity || 0) > 1) {
+            item.quantity--;
             input.value = item.quantity;
             updateCart();
-          });
-          card.querySelector(".decrease").addEventListener("click", () => {
-            if ((item.quantity || 0) > 1) {
-              item.quantity--;
-              input.value = item.quantity;
-              updateCart();
-            }
-          });
-          card.querySelector(".remove-btn").addEventListener("click", () => {
-            cart.splice(index, 1);
-            updateCart();
-          });
+          }
         });
+        card.querySelector(".remove-btn").addEventListener("click", () => {
+          cart.splice(index, 1);
+          updateCart();
+        });
+      });
 
-        cartTotal.textContent = total;
-      }
+      cartTotal.textContent = total;
+    }
 
-      function updateCart() {
-        localStorage.setItem("cart", JSON.stringify(cart));
-        renderCart();
-      }
-
+    function updateCart() {
+      localStorage.setItem("cart", JSON.stringify(cart));
       renderCart();
-    </script>
+    }
 
-    <!-- ⭐ CASHFREE SCRIPT -->
-    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+    renderCart();
+  </script>
 
-    <!-- ⭐ CASHFREE PAYMENT LOGIC -->
-    <script>
-      document
-        .getElementById("pay-now-btn")
-        .addEventListener("click", async () => {
-          let amount =
-            Number(document.getElementById("cart-total").textContent) || 0;
+  <!-- ⭐ CASHFREE SCRIPT -->
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
 
-          if (!amount || amount == 0) {
-            alert("Your cart is empty");
-            return;
-          }
+  <!-- ⭐ CASHFREE PAYMENT LOGIC -->
+  <script>
+    const payNowBtn = document.getElementById("pay-now-btn");
+    const addressModal = document.getElementById("address-modal");
+    const addressForm = document.getElementById("address-form");
+    const cancelAddrBtn = document.getElementById("cancel-addr-btn");
 
-          // Create order via backend
-          try {
-            const res = await fetch("http://localhost:5000/create-order", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ amount: amount }),
-            });
+    // 1. Pay Now Click -> Show Modal
+    payNowBtn.addEventListener("click", () => {
+      let amount = Number(document.getElementById("cart-total").textContent) || 0;
+      if (!amount || amount == 0) {
+        alert("Your cart is empty");
+        return;
+      }
+      addressModal.classList.add("show");
+    });
 
-            const data = await res.json();
+    // 2. Cancel Modal
+    cancelAddrBtn.addEventListener("click", () => {
+      addressModal.classList.remove("show");
+    });
 
-            if (!data.success) {
-              alert("Payment could not be started");
-              return;
-            }
+    // 3. Confirm Address -> Proceed to Payment
+    addressForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-            const cashfree = Cashfree({ mode: "sandbox" });
+      // Basic validation is handled by 'required' attributes
+      // Collect data if needed for backend (not used in this demo but good practice)
+      const addressData = {
+        name: document.getElementById("addr-name").value,
+        line1: document.getElementById("addr-line1").value,
+        city: document.getElementById("addr-city").value,
+        state: document.getElementById("addr-state").value,
+        zip: document.getElementById("addr-zip").value,
+        phone: document.getElementById("addr-phone").value,
+      };
 
-            cashfree.checkout({
-              paymentSessionId: data.paymentSessionId,
-              redirectTarget: "_self",
-            });
-          } catch (err) {
-            console.error(err);
-            alert("Payment failed to start");
-          }
+      // Hide modal
+      addressModal.classList.remove("show");
+
+      // Proceed to Payment
+      await initiatePayment();
+    });
+
+    async function initiatePayment() {
+      let amount = Number(document.getElementById("cart-total").textContent) || 0;
+
+      // Create order via backend
+      try {
+        const res = await fetch("http://localhost:5000/create-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ amount: amount }),
         });
-    </script>
 
-    <style>
-      /* Polished Remove button for cart items */
-      .category-card .remove-btn {
-        background-color: #2e7d32;
-        color: #fff;
-        border: none;
-        padding: 10px 16px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: background-color 0.2s, transform 0.08s;
-        min-width: 88px;
-      }
-      .category-card .remove-btn:hover {
-        background-color: #1b5e20;
-        transform: translateY(-1px);
-      }
-    </style>
+        const data = await res.json();
 
-    <footer class="site-footer">© VAJRA NATURALS</footer>
-  </body>
+        if (!data.success) {
+          alert("Payment could not be started");
+          return;
+        }
+
+        const cashfree = Cashfree({ mode: "sandbox" });
+
+        cashfree.checkout({
+          paymentSessionId: data.paymentSessionId,
+          redirectTarget: "_self",
+        });
+      } catch (err) {
+        console.error(err);
+        // Fallback for demo if backend is not running
+        alert("Payment gateway would open here. (Backend not reachable)");
+      }
+    }
+  </script>
+
+  <style>
+    /* Polished Remove button for cart items */
+    .category-card .remove-btn {
+      background-color: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s, transform 0.08s;
+      min-width: 88px;
+    }
+
+    .category-card .remove-btn:hover {
+      background-color: #1b5e20;
+      transform: translateY(-1px);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #1b451d;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .cancel-btn {
+      background: #ccc;
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .confirm-btn {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+
+  <footer class="site-footer">© VAJRA NATURALS</footer>
+</body>
+
 </html>

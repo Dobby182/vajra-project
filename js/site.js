@@ -153,6 +153,57 @@
     return visible;
   };
 
+  // Attach like button handlers to cards in a container
+  window.__site.attachLikeHandlers = function (
+    containerSelector = ".category-container"
+  ) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    const cards = container.querySelectorAll(".category-card");
+    cards.forEach((card) => {
+      const likeBtn = card.querySelector(".like-btn");
+      if (!likeBtn) return;
+
+      // Extract product data
+      const name = card.querySelector("h3")?.textContent.trim();
+      const pEl = card.querySelector("p");
+      let price = 0;
+      if (pEl) {
+        const firstText = pEl.childNodes[0]?.textContent || "";
+        price = parseInt(firstText.replace(/[^0-9]/g, "").trim()) || 0;
+      }
+      const oldPrice =
+        card.querySelector(".old-price")?.textContent.replace(/[^0-9]/g, "") ||
+        "";
+      const imgAttr = card.querySelector("img")?.getAttribute("src") || "";
+      const img = window.__site.normalizeImg(imgAttr);
+
+      const product = { name, price, oldPrice, img };
+
+      // Set initial state
+      if (window.__site.isLiked(name)) {
+        likeBtn.textContent = "❤️";
+      } else {
+        likeBtn.textContent = "🤍";
+      }
+
+      // Add click listener
+      // Remove existing listeners by cloning (simple way to clear anonymous listeners)
+      // or just assume we are replacing the logic. 
+      // Since we are refactoring, we will remove the inline logic in HTML files.
+      
+      likeBtn.onclick = function() {
+        window.__site.toggleLiked(product);
+        if (window.__site.isLiked(name)) {
+          likeBtn.textContent = "❤️";
+        } else {
+          likeBtn.textContent = "🤍";
+        }
+      };
+    });
+  };
+
   // Run migration immediately
   window.__site.migrate();
 })();
