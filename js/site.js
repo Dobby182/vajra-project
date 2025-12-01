@@ -171,10 +171,12 @@
       : document;
     if (!container) return;
 
-    const cards = container.querySelectorAll(".product-card");
+    // Support both class names
+    const cards = container.querySelectorAll(".product-card, .category-card");
     cards.forEach((card) => {
       const nameEl = card.querySelector("h3");
-      const priceEl = card.querySelector(".price");
+      // Support .price class or just p tag
+      const priceEl = card.querySelector(".price") || card.querySelector("p");
       const imgEl = card.querySelector("img");
       const likeBtn = card.querySelector(".like-btn");
 
@@ -187,12 +189,13 @@
       // Parse price
       let price = 0;
       let oldPrice = "";
-      const match = priceText.match(/Rs\.?\s*(\d+)/);
+      // Match Rs. or ₹ symbol
+      const match = priceText.match(/(?:Rs\.?|₹)\s*(\d+)/);
       if (match) {
         price = parseInt(match[1], 10);
       }
-      // Try to find old price (strike)
-      const strike = priceEl.querySelector("strike");
+      // Try to find old price (strike or span with old-price)
+      const strike = priceEl.querySelector("strike") || priceEl.querySelector(".old-price");
       if (strike) {
         oldPrice = strike.textContent.trim();
       }
