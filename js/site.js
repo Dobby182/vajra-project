@@ -227,6 +227,26 @@
     });
   };
 
-  // Run migration immediately
+  // ⭐ UPDATE PROFILE LINK
+  window.__site.updateProfileLink = function () {
+    const profileLink = document.querySelector('a[href*="login.html"], a[href*="profile.html"]');
+    if (!profileLink) return;
+
+    // Find the icon inside to make sure it's the right link (user circle)
+    const icon = profileLink.querySelector(".fa-user-circle");
+    if (!icon) return;
+
+    const userId = localStorage.getItem("userId");
+    if (userId && userId !== "undefined" && userId !== "null") {
+      profileLink.href = "/profile.html"; // Use absolute path
+    } else {
+      profileLink.href = "/login.html"; // Use absolute path
+    }
+  };
+
+  // Run migration and profile update immediately
   window.__site.migrate();
+  document.addEventListener("DOMContentLoaded", () => {
+    window.__site.updateProfileLink();
+  });
 })();

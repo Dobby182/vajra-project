@@ -127,25 +127,15 @@
 
   <!-- SEARCH SCRIPT -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("searchForm");
+    document.addEventListener("DOMContentLoaded", () => {
+      // Search functionality
+      const searchForm = document.querySelector(".search-bar");
+      const searchInput = searchForm.querySelector("input");
 
-      // ⭐ NAVBAR PROFILE LOGIC
-      const profileLink = document.querySelector('a[href="login.html"]');
-      if (profileLink) {
-        const userId = localStorage.getItem("userId");
-        if (userId) {
-          profileLink.href = "profile.html";
-        }
-      }
-
-      form.addEventListener("submit", function (e) {
+      searchForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        let search = document
-          .getElementById("searchInput")
-          .value.toLowerCase()
-          .trim();
+        let search = searchInput.value.toLowerCase().trim();
 
         if (search.includes("hair")) {
           window.location.href = "/category/hair.html";
