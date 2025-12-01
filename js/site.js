@@ -232,8 +232,8 @@
     const profileLink = document.querySelector('a[href*="login.html"], a[href*="profile.html"]');
     if (!profileLink) return;
 
-    // Find the icon inside to make sure it's the right link (user circle)
-    const icon = profileLink.querySelector(".fa-user-circle");
+    // Find the icon inside to make sure it's the right link (user circle or circle user)
+    const icon = profileLink.querySelector(".fa-user-circle, .fa-circle-user");
     if (!icon) return;
 
     const userId = localStorage.getItem("userId");
