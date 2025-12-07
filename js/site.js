@@ -244,8 +244,12 @@
     }
   };
 
-  // Run migration and profile update immediately
-  window.__site.migrate();
+  // Run migration only if not already done
+  if (!localStorage.getItem("migration_v2_complete")) {
+    window.__site.migrate();
+  }
+
+  // Run profile update immediately
   document.addEventListener("DOMContentLoaded", () => {
     window.__site.updateProfileLink();
   });

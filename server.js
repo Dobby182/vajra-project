@@ -8,6 +8,7 @@ const nodemailer = require("nodemailer");
 
 const path = require("path");
 const bcrypt = require("bcryptjs");
+const { generateOTP } = require("./utils");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -125,7 +126,8 @@ app.post("/api/forgot-password", async (req, res) => {
     }
 
     // Generate 4-digit OTP
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    // Generate 4-digit OTP
+    const otp = generateOTP();
     const otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 mins
 
     user.otp = otp;
