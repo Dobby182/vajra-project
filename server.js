@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname)));
 
 // ⭐ CONNECT TO MONGODB
-const MONGO_URI = "mongodb://localhost:27017/vajraDB";
+const MONGO_URI = "mongodb+srv://25mx225_db_user:1PlbsO6IBi9T1i5t@vajra.owox4bt.mongodb.net/vajraDB?appName=Vajra";
 
 mongoose
   .connect(MONGO_URI)
@@ -353,7 +353,7 @@ app.get("/payment-failed", (req, res) => {
 });
 
 // ⭐ START SERVER
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
 });
