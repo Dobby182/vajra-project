@@ -103,14 +103,14 @@
       const email = document.getElementById("reset-email").value;
 
       try {
-        const res = await fetch("http://localhost:5000/api/forgot-password", {
+        const response = await fetch("/api/forgot-password", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
         });
-        const data = await res.json();
+        const data = await response.json();
 
-        if (res.ok) {
+        if (response.ok) {
           alert("OTP sent to your email");
           userEmail = email;
           step1Form.style.display = "none";
@@ -131,13 +131,11 @@
       const newPassword = document.getElementById("new-password").value;
 
       try {
-        const res = await fetch("http://localhost:5000/api/reset-password", {
+        const response = await fetch("/api/reset-password", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: userEmail, otp, newPassword }),
         });
-        const data = await res.json();
-
         if (res.ok) {
           alert("Password reset successful! Please login.");
           window.location.href = "login.html";

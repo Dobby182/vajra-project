@@ -273,7 +273,7 @@ app.post("/create-order", async (req, res) => {
         },
 
         order_meta: {
-          return_url: `http://localhost:5000/success.html?order_id=${orderId}`,
+          return_url: `${req.protocol}://${req.get("host")}/success.html?order_id=${orderId}`,
           notify_url: "",
         },
       },

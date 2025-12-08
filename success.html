@@ -116,12 +116,12 @@
 
       if (orderId) {
         try {
-          const res = await fetch("http://localhost:5000/api/verify-payment", {
+          const response = await fetch("/api/verify-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ orderId }),
           });
-          const data = await res.json();
+          const data = await response.json();
 
           if (data.success) {
             statusMsg.textContent = "Thank you for your purchase! Your order has been confirmed.";

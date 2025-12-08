@@ -245,7 +245,7 @@
       const userId = localStorage.getItem("userId");
       if (userId) {
         try {
-          const res = await fetch(`http://localhost:5000/api/get-addresses/${userId}`);
+          const res = await fetch(`/api/get-addresses/${userId}`);
           const data = await res.json();
           if (res.ok) saved = data.addresses || [];
         } catch (err) {
@@ -313,7 +313,7 @@
         if (userId) {
           // Save to Backend
           try {
-            await fetch("http://localhost:5000/api/add-address", {
+            await fetch("/api/add-address", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ userId, address: addressData }),
@@ -357,7 +357,7 @@
 
       // Create order via backend
       try {
-        const response = await fetch("http://localhost:5000/create-order", {
+        const response = await fetch("/create-order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
