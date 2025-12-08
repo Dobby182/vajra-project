@@ -136,7 +136,10 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: userEmail, otp, newPassword }),
         });
-        if (res.ok) {
+
+        const data = await response.json();
+
+        if (response.ok) {
           alert("Password reset successful! Please login.");
           window.location.href = "login.html";
         } else {
