@@ -253,35 +253,37 @@
             localStorage.removeItem("userName");
             localStorage.removeItem("savedAddresses"); // Optional: clear local cache
             window.location.href = "login.html";
-            async function loadData() {
-                // 1. Fetch Addresses
-                try {
-                    const response = await fetch(`/api/get-addresses/${userId}`);
-                    const data = await response.json();
-                    renderAddresses(data.addresses || []);
-                } catch (err) {
-                    console.error(err);
-                    document.getElementById("address-list").innerHTML = "<p>Failed to load addresses.</p>";
-                }
+        }
 
-                // 2. Fetch Orders
-                try {
-                    const response = await fetch(`/api/get-orders/${userId}`);
-                    const data = await response.json();
-                    renderOrders(data.orders || []);
-                } catch (err) {
-                    console.error(err);
-                    document.getElementById("order-list").innerHTML = "<p>Failed to load orders.</p>";
-                }
+        async function loadData() {
+            // 1. Fetch Addresses
+            try {
+                const response = await fetch(`/api/get-addresses/${userId}`);
+                const data = await response.json();
+                renderAddresses(data.addresses || []);
+            } catch (err) {
+                console.error(err);
+                document.getElementById("address-list").innerHTML = "<p>Failed to load addresses.</p>";
             }
 
-            function renderAddresses(addresses) {
-                const container = document.getElementById("address-list");
-                if (addresses.length === 0) {
-                    container.innerHTML = "<p>No saved addresses found.</p>";
-                    return;
-                }
-                container.innerHTML = addresses.map(addr => `
+            // 2. Fetch Orders
+            try {
+                const response = await fetch(`/api/get-orders/${userId}`);
+                const data = await response.json();
+                renderOrders(data.orders || []);
+            } catch (err) {
+                console.error(err);
+                document.getElementById("order-list").innerHTML = "<p>Failed to load orders.</p>";
+            }
+        }
+
+        function renderAddresses(addresses) {
+            const container = document.getElementById("address-list");
+            if (addresses.length === 0) {
+                container.innerHTML = "<p>No saved addresses found.</p>";
+                return;
+            }
+            container.innerHTML = addresses.map(addr => `
           <div class="address-item">
             <strong>${addr.name}</strong><br>
             ${addr.line1}, ${addr.city}<br>
@@ -289,30 +291,30 @@
             Phone: ${addr.phone}
           </div>
         `).join("");
+        }
+
+        function renderOrders(orders) {
+            const container = document.getElementById("order-list");
+            // Sort by date desc
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (orders.length === 0) {
+                container.innerHTML = "<p>No orders found.</p>";
+                return;
             }
 
-            function renderOrders(orders) {
-                const container = document.getElementById("order-list");
-                // Sort by date desc
-                orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+            container.innerHTML = orders.map(order => {
+                const date = new Date(order.date).toLocaleDateString();
+                const statusClass = `status-${order.status}`;
 
-                if (orders.length === 0) {
-                    container.innerHTML = "<p>No orders found.</p>";
-                    return;
-                }
-
-                container.innerHTML = orders.map(order => {
-                    const date = new Date(order.date).toLocaleDateString();
-                    const statusClass = `status-${order.status}`;
-
-                    const itemsHtml = order.items.map(item => `
+                const itemsHtml = order.items.map(item => `
             <div class="order-product">
               <span>${item.name} (x${item.qty || 1})</span>
               <span>Rs. ${item.price}</span>
             </div>
           `).join("");
 
-                    return `
+                return `
             <div class="order-item">
               <div class="order-header">
                 <span>Order ID: ${order.orderId}</span>
@@ -328,8 +330,8 @@
               </div>
             </div>
           `;
-                }).join("");
-            }
+            }).join("");
+        }
     </script>
 </body>
 
