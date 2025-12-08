@@ -107,8 +107,9 @@
           body: JSON.stringify({ name, email, password }),
         });
 
+        const data = await response.json();
 
-        if (res.ok) {
+        if (response.ok) {
           msg.style.color = "green";
           msg.textContent = "Registration Successful! Redirecting...";
 
@@ -120,7 +121,6 @@
           msg.textContent = data.message || "Registration Failed!";
         }
       });
-  </script>
   </script>
   <footer class="site-footer">© VAJRA NATURALS</footer>
 </body>
